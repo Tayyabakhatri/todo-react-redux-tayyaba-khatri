@@ -1,4 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
+import Tasks from "../../Components/Tasks";
+ const inputFieldSlice =createSlice({
+    name:'todo',
+    initialState:{
+        tasks:[]
+    },
+    reducers:{
+        addTask: (state, action) => {
+            state.tasks.push(action.payload); // Add new task to tasks array
+          },
+    }
+})
+export const {addTask}=inputFieldSlice.actions;
+export default inputFieldSlice.reducer;
 // const initialState = {
 //     value: 0,
 //   }
