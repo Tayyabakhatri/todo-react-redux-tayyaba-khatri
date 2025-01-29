@@ -3,8 +3,22 @@ import "tailwindcss";
 import { useSelector, useDispatch } from "react-redux";
 import { addTask } from "../features/counter/todoSlice";
 const Tasks = () => {
+  let [color,setColor]=useState()
   const tasks = useSelector((state) => state.todo.tasks);
   console.log(tasks);
+  const colors = useSelector((state) => state.todo.colors);
+  console.log(colors);
+  colors.map((colors)=>{
+    setColor(colors)
+    
+  })
+  
+  // for (var i = 0; i >= colors.length; i++) {
+  //   let color = "";
+  //   color = colors[i];
+  //   console.log(color);
+  // }
+
   const dispatch = useDispatch();
   let [taskInput, setTaskInput] = useState("");
   const handlerButton = () => {
@@ -16,7 +30,7 @@ const Tasks = () => {
 
   return (
     <>
-      <div className="bg-[white] p-2 rounded grid grid-cols-3 grid-flow-col gap-4">
+      <div className="bg-[white] p-2 rounded flex flex-wrap">
         {/* div 1 */}
         <div className="col-span-1">
           <htmlForm>
@@ -255,10 +269,10 @@ const Tasks = () => {
           </button>
         </div> */}
         {/* div 2 */}
-        <div className="col-span-2 border  border-amber-400 ">
+        <div className="col-span-2 border flex flex-wrap gap-2  ">
           {tasks.map((task, index) => (
             <div key={index} className="text-[#000]">
-              {task}
+              <div className=" p-2 m-2">{task}</div>
             </div>
           ))}
         </div>

@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
  const inputFieldSlice =createSlice({
     name:'todo',
     initialState:{
-        tasks:[]
+        tasks:[],
+        colors:["#c7eaef","##ffdad1","#ffd49f","#f6f2af"]
     },
     reducers:{
         addTask: (state, action) => {
