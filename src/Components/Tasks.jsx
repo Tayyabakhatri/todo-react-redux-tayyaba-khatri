@@ -183,7 +183,7 @@ const Tasks = () => {
         </div>
         {/* div 2 */}
         <div className="col-span-2 border-8">
-          <p>Make it heppen</p>
+          <p className=" font-mono text-center text-3xl">Your works to do</p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {tasks.map((task, index) => (
               <div
