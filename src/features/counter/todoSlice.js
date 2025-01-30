@@ -4,16 +4,20 @@ import { createSlice } from "@reduxjs/toolkit";
     name:'todo',
     initialState:{
         tasks:[],
-        colors:["#c7eaef","##ffdad1","#ffd49f","#f6f2af"]
+        colors:["#c7eaef","#ffdad1","#ffd49f","#f6f2af"],
+        colorIndex:0
     },
     reducers:{
         addTask: (state, action) => {
-            state.tasks.push(action.payload); // Add new task to tasks array
+            const color=state.colors[state.colorIndex]//store the color based on index
+            state.tasks.push({text:action.payload,color}); // Add new task to tasks array
+            state.colorIndex = (state.colorIndex + 1) % state.colors.length; // Move to next color
           },
     }
 })
 export const {addTask}=inputFieldSlice.actions;
 export default inputFieldSlice.reducer;
+export const selectTasks = (state) => state.todo.tasks;
 // const initialState = {
 //     value: 0,
 //   }

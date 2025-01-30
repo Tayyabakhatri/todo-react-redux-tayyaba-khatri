@@ -1,40 +1,30 @@
 import React, { useState } from "react";
 import "tailwindcss";
 import { useSelector, useDispatch } from "react-redux";
-import { addTask } from "../features/counter/todoSlice";
+import { addTask, selectTasks } from "../features/counter/todoSlice";
 const Tasks = () => {
-  let [color,setColor]=useState()
-  const tasks = useSelector((state) => state.todo.tasks);
-  console.log(tasks);
-  const colors = useSelector((state) => state.todo.colors);
-  console.log(colors);
-  colors.map((colors)=>{
-    setColor(colors)
-    
-  })
-  
-  // for (var i = 0; i >= colors.length; i++) {
-  //   let color = "";
-  //   color = colors[i];
-  //   console.log(color);
-  // }
-
   const dispatch = useDispatch();
+  const tasks = useSelector((state) => state.todo.tasks);
+  // const colors = useSelector((state) => state.todo.colors);
+
   let [taskInput, setTaskInput] = useState("");
+  // const [colorIndex, setColorIndex] = useState(0);
+
   const handlerButton = () => {
     if (taskInput.trim()) {
       dispatch(addTask(taskInput));
       setTaskInput("");
+      // setColorIndex((prevIndex) => (prevIndex + 1) % colors.length);
     }
   };
 
   return (
     <>
-      <div className="bg-[white] p-2 rounded flex flex-wrap">
+      <div className="bg-[white] p-2 rounded grid grid-cols-1 md:grid-cols-3  gap-3 h-[100%]">
         {/* div 1 */}
-        <div className="col-span-1">
+        <div>
           <htmlForm>
-            <div className="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+            <div className="w-full mb-4 border border-gray-200 rounded-lg bg-gray-100 dark:bg-gray-700 dark:border-gray-600">
               <div className="flex items-center justify-between px-3 py-2 border-b border-gray-200 dark:border-gray-600 border-gray-200">
                 <div className="flex flex-wrap items-center divide-gray-200 sm:divide-x sm:rtl:divide-x-reverse dark:divide-gray-600">
                   <div className="flex items-center space-x-1 rtl:space-x-reverse sm:pe-4">
@@ -58,21 +48,7 @@ const Tasks = () => {
                       </svg>
                       <span className="sr-only">Attach file</span>
                     </button>
-                    <button
-                      type="button"
-                      className="p-2 text-gray-500 rounded-sm cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600"
-                    >
-                      <svg
-                        className="w-4 h-4"
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="currentColor"
-                        viewBox="0 0 16 20"
-                      >
-                        <path d="M8 0a7.992 7.992 0 0 0-6.583 12.535 1 1 0 0 0 .12.183l.12.146c.112.145.227.285.326.4l5.245 6.374a1 1 0 0 0 1.545-.003l5.092-6.205c.206-.222.4-.455.578-.7l.127-.155a.934.934 0 0 0 .122-.192A8.001 8.001 0 0 0 8 0Zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" />
-                      </svg>
-                      <span className="sr-only">Embed map</span>
-                    </button>
+
                     <button
                       type="button"
                       className="p-2 text-gray-500 rounded-sm cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600"
@@ -89,22 +65,7 @@ const Tasks = () => {
                       </svg>
                       <span className="sr-only">Upload image</span>
                     </button>
-                    <button
-                      type="button"
-                      class="p-2 text-gray-500 rounded-sm cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600"
-                    >
-                      <svg
-                        className="w-4 h-4"
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="currentColor"
-                        viewBox="0 0 16 20"
-                      >
-                        <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.96 2.96 0 0 0 .13 5H5Z" />
-                        <path d="M14.067 0H7v5a2 2 0 0 1-2 2H0v11a1.969 1.969 0 0 0 1.933 2h12.134A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.933-2ZM6.709 13.809a1 1 0 1 1-1.418 1.409l-2-2.013a1 1 0 0 1 0-1.412l2-2a1 1 0 0 1 1.414 1.414L5.412 12.5l1.297 1.309Zm6-.6-2 2.013a1 1 0 1 1-1.418-1.409l1.3-1.307-1.295-1.295a1 1 0 0 1 1.414-1.414l2 2a1 1 0 0 1-.001 1.408v.004Z" />
-                      </svg>
-                      <span className="sr-only">htmlFormat code</span>
-                    </button>
+
                     <button
                       type="button"
                       className="p-2 text-gray-500 rounded-sm cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600"
@@ -143,37 +104,7 @@ const Tasks = () => {
                       </svg>
                       <span className="sr-only">Add list</span>
                     </button>
-                    <button
-                      type="button"
-                      className="p-2 text-gray-500 rounded-sm cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600"
-                    >
-                      <svg
-                        className="w-4 h-4"
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path d="M18 7.5h-.423l-.452-1.09.3-.3a1.5 1.5 0 0 0 0-2.121L16.01 2.575a1.5 1.5 0 0 0-2.121 0l-.3.3-1.089-.452V2A1.5 1.5 0 0 0 11 .5H9A1.5 1.5 0 0 0 7.5 2v.423l-1.09.452-.3-.3a1.5 1.5 0 0 0-2.121 0L2.576 3.99a1.5 1.5 0 0 0 0 2.121l.3.3L2.423 7.5H2A1.5 1.5 0 0 0 .5 9v2A1.5 1.5 0 0 0 2 12.5h.423l.452 1.09-.3.3a1.5 1.5 0 0 0 0 2.121l1.415 1.413a1.5 1.5 0 0 0 2.121 0l.3-.3 1.09.452V18A1.5 1.5 0 0 0 9 19.5h2a1.5 1.5 0 0 0 1.5-1.5v-.423l1.09-.452.3.3a1.5 1.5 0 0 0 2.121 0l1.415-1.414a1.5 1.5 0 0 0 0-2.121l-.3-.3.452-1.09H18a1.5 1.5 0 0 0 1.5-1.5V9A1.5 1.5 0 0 0 18 7.5Zm-8 6a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Z" />
-                      </svg>
-                      <span className="sr-only">Settings</span>
-                    </button>
-                    <button
-                      type="button"
-                      className="p-2 text-gray-500 rounded-sm cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600"
-                    >
-                      <svg
-                        className="w-4 h-4"
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path d="M18 2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2ZM2 18V7h6.7l.4-.409A4.309 4.309 0 0 1 15.753 7H18v11H2Z" />
-                        <path d="M8.139 10.411 5.289 13.3A1 1 0 0 0 5 14v2a1 1 0 0 0 1 1h2a1 1 0 0 0 .7-.288l2.886-2.851-3.447-3.45ZM14 8a2.463 2.463 0 0 0-3.484 0l-.971.983 3.468 3.468.987-.971A2.463 2.463 0 0 0 14 8Z" />
-                      </svg>
-                      <span className="sr-only">Timeline</span>
-                    </button>
+
                     <button
                       type="button"
                       className="p-2 text-gray-500 rounded-sm cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600"
@@ -230,7 +161,7 @@ const Tasks = () => {
                 <textarea
                   id="editor"
                   rows="8"
-                  className="block w-full px-0 text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
+                  className="block w-full px-0 text-lg h-[100%] text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
                   // placeholder="Write an article..."
                   required
                   value={taskInput}
@@ -250,31 +181,33 @@ const Tasks = () => {
             </button>
           </htmlForm>
         </div>
-        {/* <div className="row-span-3 border bg-[#f4f4f4] p-3 rounded w-[1/4]">
-          <p className="text-[#000]">Tasks</p>
-          <input
-            type="text"
-            value={taskInput}
-            onChange={(e) => setTaskInput(e.target.value)}
-            className="border-1 text-[#000]"
-            placeholder="enter your task"
-          />
-          <button
-            onClick={handlerButton}
-            className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800"
-          >
-            <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-              Add Task
-            </span>
-          </button>
-        </div> */}
         {/* div 2 */}
-        <div className="col-span-2 border flex flex-wrap gap-2  ">
-          {tasks.map((task, index) => (
-            <div key={index} className="text-[#000]">
-              <div className=" p-2 m-2">{task}</div>
-            </div>
-          ))}
+        <div className="col-span-2">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {tasks.map((task, index) => (
+              <div
+                key={index}
+                className="text-[#000] w-auto"
+                style={{ backgroundColor: task.color }}
+              >
+                <div className=" p-2 m-2">
+                  {task.text}
+                  <div className="flex gap-2 mt-2">
+                    <button>
+                      <span className="relative px-2 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                        Delete
+                      </span>
+                    </button>
+                    <button>
+                      <span className="relative px-2 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                        Edit
+                      </span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </>
