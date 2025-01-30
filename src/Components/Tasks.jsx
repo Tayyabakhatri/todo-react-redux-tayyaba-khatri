@@ -182,8 +182,8 @@ const Tasks = () => {
           </htmlForm>
         </div>
         {/* div 2 */}
-        <div className="col-span-2 border-8">
-          <p className=" font-mono text-center text-3xl">Your works to do</p>
+        <div className="col-span-2 border border-gray-500">
+          <p className=" font-mono text-center text-3xl text-black">Your works to do</p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {tasks.map((task, index) => (
               <div
