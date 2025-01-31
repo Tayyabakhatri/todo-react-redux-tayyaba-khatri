@@ -22,7 +22,7 @@ const Tasks = () => {
     <>
       <div className="bg-[white] p-2 rounded grid grid-cols-1 md:grid-cols-3  gap-3 h-[100%]">
         {/* div 1 */}
-        <div>
+        <div className="h-full">
           <htmlForm>
             <div className="w-full mb-4 border border-gray-200 rounded-lg bg-gray-100 dark:bg-gray-700 dark:border-gray-600">
               <div className="flex items-center justify-between px-3 py-2 border-b border-gray-200 dark:border-gray-600 border-gray-200">
