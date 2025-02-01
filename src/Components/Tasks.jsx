@@ -1,26 +1,23 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "tailwindcss";
 import { useSelector, useDispatch } from "react-redux";
-import { addTask, selectTasks } from "../features/counter/todoSlice";
+import { addTask, delTask} from "../features/counter/todoSlice";
 const Tasks = () => {
   const dispatch = useDispatch();
-  const tasks = useSelector((state) => state.todo.tasks);
-  // const colors = useSelector((state) => state.todo.colors);
+  const tasks = useSelector(state => state.todo.tasks);
 
   let [taskInput, setTaskInput] = useState("");
-  // const [colorIndex, setColorIndex] = useState(0);
 
   const handlerButton = () => {
     if (taskInput.trim()) {
       dispatch(addTask(taskInput));
       setTaskInput("");
-      // setColorIndex((prevIndex) => (prevIndex + 1) % colors.length);
     }
   };
-
+ 
   return (
     <>
-      <div className="bg-[white] p-2 rounded grid grid-cols-1 md:grid-cols-3  gap-3 h-[100%]">
+      <div className="bg-[white] p-2 m-3 md:m-[30px] rounded grid grid-cols-1 md:grid-cols-3  gap-3 h-full">
         {/* div 1 */}
         <div className="h-full">
           <htmlForm>
@@ -71,7 +68,7 @@ const Tasks = () => {
                       className="p-2 text-gray-500 rounded-sm cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600"
                     >
                       <svg
-                        class="w-4 h-4"
+                        className="w-4 h-4"
                         aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="currentColor"
@@ -110,7 +107,7 @@ const Tasks = () => {
                       className="p-2 text-gray-500 rounded-sm cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600"
                     >
                       <svg
-                        class="w-4 h-4"
+                        className="w-4 h-4"
                         aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="currentColor"
@@ -183,7 +180,9 @@ const Tasks = () => {
         </div>
         {/* div 2 */}
         <div className="col-span-2 border border-gray-500">
-          <p className=" font-semibold text-center text-3xl text-black bg-cyan-100 p-4 mb-4">Your works to do</p>
+          <p className=" font-semibold text-center text-3xl text-black bg-cyan-100 p-4 mb-4">
+            Your works to do
+          </p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {tasks.map((task, index) => (
               <div
@@ -193,8 +192,9 @@ const Tasks = () => {
               >
                 <div className=" p-2 m-2">
                   {task.text}
+
                   <div className="flex gap-2 mt-2">
-                    <button>
+                    <button onClick={() => dispatch(delTask(index))}>
                       <span className="relative px-2 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                         Delete
                       </span>

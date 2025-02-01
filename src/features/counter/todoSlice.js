@@ -13,9 +13,16 @@ import { createSlice } from "@reduxjs/toolkit";
             state.tasks.push({text:action.payload,color}); // Add new task to tasks array
             state.colorIndex = (state.colorIndex + 1) % state.colors.length; // Move to next color
           },
+          delTask:(state,action )=>{
+            state.tasks.splice(action.payload,1)
+        },
+        editTask:(state,action)=>{
+const{index,newText}=action.payload
+        }
     }
 })
 export const {addTask}=inputFieldSlice.actions;
+export const {delTask}=inputFieldSlice.actions;
 export default inputFieldSlice.reducer;
 export const selectTasks = (state) => state.todo.tasks;
 // const initialState = {
