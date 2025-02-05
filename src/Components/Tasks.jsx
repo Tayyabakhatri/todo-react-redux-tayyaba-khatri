@@ -1,11 +1,12 @@
 import React, { useRef, useState } from "react";
 import "tailwindcss";
 import { useSelector, useDispatch } from "react-redux";
-import { addTask, delTask} from "../features/counter/todoSlice";
+import { addTask, delTask, editTask} from "../features/counter/todoSlice";
 const Tasks = () => {
   const dispatch = useDispatch();
   const tasks = useSelector(state => state.todo.tasks);
-
+  const [editingIndex, setEditingIndex] = useState(-1);
+  const [editedText, setEditedText] = useState("");
   let [taskInput, setTaskInput] = useState("");
 
   const handlerButton = () => {
@@ -14,12 +15,26 @@ const Tasks = () => {
       setTaskInput("");
     }
   };
+  const handleEdit = (index) => {
+  const promptText=prompt("edit text")
+  console.log(promptText);
+  dispatch(editTask(editedText ,editingIndex))
+
+    setEditingIndex(index);
+    setEditedText(tasks[index].promptText);
+  };
+  // const saveEdit = (index) => {
+  //   if (editedText.trim()) {
+  //     dispatch(editTask({ index, newText: editedText }));
+  //     setEditingIndex(-1);
+  //   }
+  // };
  
   return (
     <>
       <div className="bg-[white] p-2 m-3 md:m-[30px] rounded grid grid-cols-1 md:grid-cols-3  gap-3 h-full">
         {/* div 1 */}
-        <div className="h-full">
+        <div >
           <htmlForm>
             <div className="w-full mb-4 border border-gray-200 rounded-lg bg-gray-100 dark:bg-gray-700 dark:border-gray-600">
               <div className="flex items-center justify-between px-3 py-2 border-b border-gray-200 dark:border-gray-600 border-gray-200">
@@ -193,17 +208,22 @@ const Tasks = () => {
                 <div className=" p-2 m-2">
                   {task.text}
 
-                  <div className="flex gap-2 mt-2">
+                  <div className="flex flex-col justify-end xl:flex-row gap-2 mt-2">
                     <button onClick={() => dispatch(delTask(index))}>
                       <span className="relative px-2 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                         Delete
                       </span>
                     </button>
-                    <button>
+                    <button onClick={()=>handleEdit(index)}>
                       <span className="relative px-2 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                         Edit
                       </span>
                     </button>
+                    {/* <button  onClick={() => saveEdit(index)}>
+                      <span className="relative px-2 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                        save
+                      </span>
+                    </button> */}
                   </div>
                 </div>
               </div>

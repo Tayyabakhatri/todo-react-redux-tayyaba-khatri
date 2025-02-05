@@ -17,12 +17,17 @@ import { createSlice } from "@reduxjs/toolkit";
             state.tasks.splice(action.payload,1)
         },
         editTask:(state,action)=>{
-const{index,newText}=action.payload
+         const{index,newText}=action.payload
+          if(index>=0&&index<state.tasks.length){
+           state.tasks[index].text=newText
         }
     }
+}
 })
-export const {addTask}=inputFieldSlice.actions;
-export const {delTask}=inputFieldSlice.actions;
+    
+
+export const {addTask,delTask,editTask}=inputFieldSlice.actions;
+
 export default inputFieldSlice.reducer;
 export const selectTasks = (state) => state.todo.tasks;
 // const initialState = {
